@@ -7,7 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -16,6 +18,8 @@ import lombok.ToString;
 @Setter
 @ToString
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class Categoria implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -24,10 +28,7 @@ public class Categoria implements Serializable{
 	private Integer id;
 	private String nome;
 	
-	public Categoria(Integer id,String nome) {
-		this.id = id;
-		this.nome = nome;
-	}
+	
 
 
 
