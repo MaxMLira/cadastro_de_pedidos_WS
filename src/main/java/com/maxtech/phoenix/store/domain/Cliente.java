@@ -1,5 +1,7 @@
 package com.maxtech.phoenix.store.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.maxtech.phoenix.store.domain.enums.TipoCliente;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,8 +27,10 @@ public class Cliente implements Serializable {
     @Getter @Setter
     private String cpfOrCnpj;
     private Integer tipoCliente;
+
     @Getter @Setter
     @OneToMany(mappedBy = "cliente")
+    @JsonManagedReference
     private List<Endereco> enderecos = new ArrayList<>();
     @Getter @Setter
     @ElementCollection

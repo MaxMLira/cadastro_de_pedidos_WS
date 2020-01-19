@@ -1,5 +1,6 @@
 package com.maxtech.phoenix.store.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -20,8 +21,10 @@ public class Endereco implements Serializable {
     private String complemento;
     private String bairro;
     private String cep;
+
     @ManyToOne
     @JoinColumn(name = "cliente_id")
+    @JsonBackReference
     private Cliente cliente;
     @ManyToOne
     @JoinColumn(name = "cidade_id")

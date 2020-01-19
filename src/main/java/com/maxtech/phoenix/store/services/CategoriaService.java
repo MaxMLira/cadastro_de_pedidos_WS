@@ -17,7 +17,12 @@ public class CategoriaService {
 	
 	@Autowired
 	private CategoriaRepository repository;
-	
+
+	public CategoriaService(CategoriaRepository repository) {
+		this.repository = repository;
+	}
+
+
 	public Categoria buscar(Integer id) {
 		Optional<Categoria> categoria = repository.findById(id);
 
