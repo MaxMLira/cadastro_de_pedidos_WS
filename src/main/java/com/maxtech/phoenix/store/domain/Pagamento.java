@@ -10,7 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.maxtech.phoenix.store.domain.enums.EstadoPagamento;
 
 import lombok.AllArgsConstructor;
@@ -37,7 +37,7 @@ public abstract class Pagamento implements Serializable {
 	@MapsId
 	@Getter
 	@Setter
-	@JsonBackReference
+	@JsonIgnore
 	private Pedido pedido;
 
 	
