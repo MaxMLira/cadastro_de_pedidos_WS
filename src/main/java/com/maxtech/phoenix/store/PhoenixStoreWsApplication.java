@@ -15,6 +15,7 @@ import com.maxtech.phoenix.store.domain.Cidade;
 import com.maxtech.phoenix.store.domain.Cliente;
 import com.maxtech.phoenix.store.domain.Endereco;
 import com.maxtech.phoenix.store.domain.Estado;
+import com.maxtech.phoenix.store.domain.ItemPedido;
 import com.maxtech.phoenix.store.domain.Pagamento;
 import com.maxtech.phoenix.store.domain.PagamentoComBoleto;
 import com.maxtech.phoenix.store.domain.PagamentoComCartao;
@@ -27,6 +28,7 @@ import com.maxtech.phoenix.store.repositories.CidadeRepository;
 import com.maxtech.phoenix.store.repositories.ClienteRepository;
 import com.maxtech.phoenix.store.repositories.EnderecoRepository;
 import com.maxtech.phoenix.store.repositories.EstadoRepository;
+import com.maxtech.phoenix.store.repositories.ItemPedidoRepository;
 import com.maxtech.phoenix.store.repositories.PagamentoRepository;
 import com.maxtech.phoenix.store.repositories.PedidoRepository;
 import com.maxtech.phoenix.store.repositories.ProdutoRepository;
@@ -53,6 +55,8 @@ public class PhoenixStoreWsApplication implements CommandLineRunner {
 	private PagamentoRepository pagRepo;
 	@Autowired
 	private PedidoRepository pedidoRepository;
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepo;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -108,8 +112,16 @@ public class PhoenixStoreWsApplication implements CommandLineRunner {
 		pedidoRepository.saveAll(Arrays.asList(pedi,ped2));
 		pagRepo.saveAll(Arrays.asList(pag1,pag2));
 		
+		ItemPedido pedido1 = new ItemPedido(pedi, p1, 0.00, 1, 2000.00);
+		ItemPedido pedido2 = new ItemPedido(pedi, p3, 0.00, 2, 80.00);
+		ItemPedido pedido3 = new ItemPedido(ped2, p2, 100.00, 1, 800.00);
+		pedi.getItens().addAll(Arrays.asList(pedido1,pedido2));
+		ped2.getItens().addAll(Arrays.asList(pedido3));
+		p1.getItens().addAll(Arrays.asList(pedido1));
+		p2.getItens().addAll(Arrays.asList(pedido3));
+		p3.getItens().addAll(Arrays.asList(pedido2));
 		
-		
+		itemPedidoRepo.saveAll(Arrays.asList(pedido1,pedido2,pedido3));
 		
 		
 		

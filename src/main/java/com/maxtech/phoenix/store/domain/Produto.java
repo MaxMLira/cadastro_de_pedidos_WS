@@ -7,8 +7,10 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -22,6 +24,8 @@ public class Produto implements Serializable {
     private Integer id;
     private String nome;
     private Double preco;
+    @OneToMany(mappedBy = "id.produto")
+    private Set<ItemPedido> itens = new HashSet<>();
 
     @JsonBackReference
     @ManyToMany
@@ -36,6 +40,14 @@ public class Produto implements Serializable {
         this.id= id;
         this.nome = nome;
         this.preco = preco;
+    }
+    
+    public List<Pedido> getPedidos(){
+    	List<Pedido> lista = new ArrayList<>();
+    	itens.forEach(item->{
+    		lista.add(item.getPedido());
+    	});
+    	return lista;
     }
 
     @Override
