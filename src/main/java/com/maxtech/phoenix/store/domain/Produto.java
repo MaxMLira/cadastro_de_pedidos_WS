@@ -2,6 +2,8 @@ package com.maxtech.phoenix.store.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.*;
 
 import javax.persistence.*;
@@ -24,6 +26,7 @@ public class Produto implements Serializable {
     private Integer id;
     private String nome;
     private Double preco;
+    @JsonIgnore
     @OneToMany(mappedBy = "id.produto")
     private Set<ItemPedido> itens = new HashSet<>();
 
@@ -41,7 +44,7 @@ public class Produto implements Serializable {
         this.nome = nome;
         this.preco = preco;
     }
-    
+    @JsonIgnore
     public List<Pedido> getPedidos(){
     	List<Pedido> lista = new ArrayList<>();
     	itens.forEach(item->{
