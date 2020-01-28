@@ -19,7 +19,7 @@ public class PedidoService {
         this.pedidoRepository = pedidoRepository;
     }
 
-    public Pedido buscar(Integer id){
+    public Pedido find(Integer id){
         Optional<Pedido> Pedido = pedidoRepository.findById(id);
         return  Pedido.orElseThrow(()->  new ObjectNotFoundException("Pedido não encontrado, Id: "+id));
     }
